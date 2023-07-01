@@ -74,6 +74,21 @@ void 	SynthVoice::controllerMoved(int controllerNumber, int newControllerValue)
 }
 
 
+//passes in sample rate data to ADSR and oscillators for accurate timing & frequencies
+void    SynthVoice::prepare(double sampleRate)
+{
+    adsr.setSampleRate(sampleRate);
+
+    mainOsc.prepare(sampleRate);
+    for (int i = 0; i < 3; i++)
+    {
+        leftOsc[i].prepare(sampleRate);
+        rightOsc[i].prepare(sampleRate);
+    }
+
+}
+
+
 void 	SynthVoice::renderNextBlock(juce::AudioBuffer< float >& outputBuffer, int startSample, int numSamples)
 {
     //gets the write pointer for the left & right channel from the audio buffer
@@ -131,21 +146,6 @@ void 	SynthVoice::renderNextBlock(juce::AudioBuffer< float >& outputBuffer, int 
             rightOsc[i].resetPhase();
         }
     }
-}
-
-
-//passes in sample rate data to ADSR and oscillators for accurate timing & frequencies
-void    SynthVoice::prepare(double sampleRate)
-{
-    adsr.setSampleRate(sampleRate);
-
-    mainOsc.prepare(sampleRate);
-    for (int i = 0; i < 3; i++)
-    {
-        leftOsc[i].prepare(sampleRate);
-        rightOsc[i].prepare(sampleRate);
-    }
-
 }
 
 

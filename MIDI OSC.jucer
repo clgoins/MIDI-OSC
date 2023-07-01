@@ -9,10 +9,10 @@
       <GROUP id="{F9C762C0-0ECF-3256-ED80-27F5D116B34E}" name="Processor">
         <FILE id="fq03XN" name="Processes.h" compile="0" resource="0" file="Source/Processes.h"/>
         <FILE id="YxUALF" name="StereoSample.h" compile="0" resource="0" file="Source/StereoSample.h"/>
-        <FILE id="w3Jt2m" name="PluginProcessor.cpp" compile="1" resource="0"
-              file="Source/PluginProcessor.cpp"/>
         <FILE id="fytQ4f" name="PluginProcessor.h" compile="0" resource="0"
               file="Source/PluginProcessor.h"/>
+        <FILE id="w3Jt2m" name="PluginProcessor.cpp" compile="1" resource="0"
+              file="Source/PluginProcessor.cpp"/>
         <FILE id="yNpitr" name="APValueTreeListener.h" compile="0" resource="0"
               file="Source/APValueTreeListener.h"/>
         <FILE id="SYHNBK" name="APValueTreeListener.cpp" compile="1" resource="0"

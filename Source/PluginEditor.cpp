@@ -57,7 +57,6 @@ BASICOSCAudioProcessorEditor::BASICOSCAudioProcessorEditor (BASICOSCAudioProcess
     widthAttach = std::make_unique<SliderAttachment>(audioProcessor.vTreeState,   "WIDTH",      widthKnob);
     thickAttach = std::make_unique<SliderAttachment>(audioProcessor.vTreeState,   "THICK",      thicknessKnob);
     oscAttach = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment> ( audioProcessor.vTreeState, "OSC", oscSelect );
-
 }
 
 
@@ -79,53 +78,21 @@ void BASICOSCAudioProcessorEditor::paint (juce::Graphics& g)
 //resized defines the size and position of each child component
 void BASICOSCAudioProcessorEditor::resized()
 {
-
-    //divides the screen into 15 even spaces
-    juce::Rectangle<int> slices[15];
-    for (int i = 0; i < 15; i++)
-    {
-            slices[i].setX(i * getWidth()/15);
-            slices[i].setY(25);
-            slices[i].setWidth(getWidth() / 15);
-            slices[i].setHeight(getHeight() / 2 - 50);
-
-            //shrinks the rectangles that will serve as spaces between components
-            if (i % 2 == 0)
-            {
-                slices[i].reduce(getWidth() / 60, 0);
-            }
-            //grow the rectangles that hold the actual components to fill the empty space
-            else
-            {
-                slices[i].expand(getWidth() / 60, 0);
-            }
-    }
-
-    //set screen size  & position of each component
-    gainSlider.setBounds(slices[1]);
-    atkKnob.setBounds(slices[3].removeFromBottom(slices[3].getHeight() / 2));
-    decKnob.setBounds(slices[5].removeFromBottom(slices[5].getHeight() / 2));
-    susKnob.setBounds(slices[7].removeFromBottom(slices[7].getHeight() / 2));
-    relKnob.setBounds(slices[9].removeFromBottom(slices[9].getHeight() / 2));
-
-    //this adds up the width of the ADSR rectangles so oscSelect can sit above them
-    int oscWidth = 0;
-    for (int i = 3; i < 10; i++)
-    {
-        oscWidth += slices[i].getWidth();
-    }
-
-    oscSelect.setBounds(slices[3].getX(), slices[3].getY(), oscWidth, slices[3].getHeight()-25);
-
-    pulseSlider.setBounds(slices[11]);
-
-    //i want the thickness & width knobs to sit on top of each other
-    thicknessKnob.setBounds(slices[13].removeFromTop(slices[13].getHeight() / 2));
-    widthKnob.setBounds(slices[13].getX(),slices[13].getY()+25, slices[13].getWidth(),slices[13].getHeight());
-
+    //manually setting the size & position of each control
+    gainSlider.setBounds(38, 25, 74, 150);
+    atkKnob.setBounds(138, 100, 74, 75);
+    decKnob.setBounds(238, 100, 74, 75);
+    susKnob.setBounds(338, 100, 74, 75);
+    relKnob.setBounds(438, 100, 74, 75);
+    oscSelect.setBounds(138, 25, 374, 50);
+    pulseSlider.setBounds(538, 25, 74, 150);
+    thicknessKnob.setBounds(638, 25, 74, 75);
+    widthKnob.setBounds(638, 125, 74, 75);
 
     //GUI keyboard should span the width of the screen and sit in the bottom half.
     keyboard.setBounds(0,200,750,200);
+
+
 }
 
 //These two functions take a reference to a juce::Slider and a juce::Label and gives them some default properties

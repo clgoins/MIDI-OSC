@@ -28,36 +28,35 @@ public:
     //Must be provided to generate accurate frequencies
     void prepare(double sampleRate);
 
+    //frequency of tone generated
+    void setFrequency(float frequency);
+
     //Generates the next sample. Call repeatedly and pass return value to audio buffer to generate a tone.
     void process(StereoSample& stereoSample);
 
     //adjusts the pulse width of the square wave produced.
-    //Should be between -1.0 and 1.0. ---> 0.0 will create a perfect square wave
+    //Should be between 0.0 and 1.0. ---> 0.0 will create a perfect square wave
     void setPulseWidth(float pulseWidth);   
 
     //Defines the shape of the wave created by Process
     void setWaveShape(Oscillator::Waveform newWaveShape);
-
-    //frequency of tone generated
-    void setFrequency(float frequency);
 
     //the value passed here gets multiplied by the base frequency to detune the oscillator
     //e.g. a value of 2 will tune the osc up an octave and a value of 0.5 will tune it down an octave
     //tuning n semitones would be a value equal to 2 ^ (n / 12)
     void setFineTune(float factor);
     
+    //sets the pan value for this oscillator, from -1 (hard left) to 1 (hard right)
+    void setPan(float pan);
+
     //resets phase back to -1
     void resetPhase();
 
-    //sets the pan value for this oscillator, from -1 (hard left) to 1 (hard right)
-    void setPan(float pan);
+
 
 
 private:
     
-    //short hand so i don't have to keep writing this whole thing
-    //double pi = juce::MathConstants<float>::pi;
-
     float tick();
 
     //current phase position

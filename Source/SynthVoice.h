@@ -25,8 +25,8 @@ public:
     void 	stopNote(float velocity, bool allowTailOff) override;
     void 	pitchWheelMoved(int newPitchWheelValue) override;
     void 	controllerMoved(int controllerNumber, int newControllerValue) override;
-    void 	renderNextBlock(juce::AudioBuffer< float >& outputBuffer, int startSample, int numSamples) override;
     void    prepare(double sampleRate);
+    void 	renderNextBlock(juce::AudioBuffer< float >& outputBuffer, int startSample, int numSamples) override;
 
     //Custom functions used by the AudioProcessorValueTreeState to propagate user changes made via the GUI
     void    setGain(float newGain);

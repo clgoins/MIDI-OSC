@@ -26,6 +26,21 @@ void Oscillator::prepare(double sampleRate)
 }
 
 
+//sets oscillators current frequency and calculates deltaPhase
+void Oscillator::setFrequency(float frequency)
+{
+    jassert(sampleRateSet);     //prepare() must be called to specify sample rate first!
+
+    this->frequency = frequency * fineTune;
+
+    //each time the oscillator ticks, we should increment the phase by deltaPhase
+    //this value is set such that the phase will count from -1 to 1 "frequency" times per second
+    //i.e. if frequency = 440, we should count from -1 to 1 440 times per second
+
+    deltaPhase = (2 / sampleRate) * this->frequency;
+}
+
+
 //Generates the next audio sample
 void Oscillator::process(StereoSample& stereoSample)
 {
@@ -81,36 +96,21 @@ void Oscillator::setWaveShape(Oscillator::Waveform newWaveShape)
 }
 
 
-//sets oscillators current frequency and calculates deltaPhase
-void Oscillator::setFrequency(float frequency)
-{
-    jassert(sampleRateSet);     //prepare() must be called to specify sample rate first!
-
-    this->frequency = frequency * fineTune;
-
-    //each time the oscillator ticks, we should increment the phase by deltaPhase
-    //this value is set such that the phase will count from -1 to 1 "frequency" times per second
-    //i.e. if frequency = 440, we should count from -1 to 1 440 times per second
-
-    deltaPhase = (2 / sampleRate) * this->frequency;
-}
-
-
 void Oscillator::setFineTune(float factor)
 {
     fineTune = factor;
 }
 
 
-void Oscillator::resetPhase()
-{
-    phase = -1;
-}
-
-
 void Oscillator::setPan(float pan)
 {
     panner.setPan(pan);
+}
+
+
+void Oscillator::resetPhase()
+{
+    phase = -1;
 }
 
 
